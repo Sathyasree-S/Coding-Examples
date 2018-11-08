@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>JavaScript Example</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	function deleteRow(delBtn) {
+		delBtn.closest('tr').remove();
+	}
+	function addRow() {
+		var aname = $("#authorname").val();
+		var bname = $("#bookname").val();
+		if (aname == "") {
+			$("#authorname").css("border", "1px solid red");
+		} else {
+			$("#authorname").css("border", "1px solid grey");
+
+		}
+		if (bname == "") {
+			$("#bookname").css("border", "1px solid red");
+		} else {
+			$("#bookname").css("border", "1px solid grey");
+
+		}
+		if (aname != "" && bname != "") {
+			var table = document.getElementById("myTable");
+			var index = table.rows.length;
+			var row = table.insertRow(index);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			cell1.innerHTML = bname;
+			cell2.innerHTML = aname;
+			var cell3 = row.insertCell(2);
+			cell3.innerHTML = '<button class="btn btn-danger" value="delete" onclick=deleteRow(this)>X</button>';
+		}
+	}
+</script>
+</head>
+<body>
+	<div class="span3" style="padding: 5%; border: 1px solid grey;">
+		<h2>Add Rows to table</h2>
+		<form>
+			<label>Book name</label> <input type="text" id="bookname"
+				name="bookName" class="span3" required><br /> <label>Author
+				Name</label> <input type="text" id="authorname" name="authorName"
+				class="span3"> <br /> <input id="addRowBtn" type="button"
+				value="Add Row" class="btn btn-primary" onclick="addRow()"><br />
+			<div class="clearfix"></div>
+		</form>
+	</div>
+	<div style="border: 1px solid black;" class="table-responsive">
+		<table id="myTable" class="table table-bordered"
+			style="border: 1px solid black">
+			<th>Book Name</th>
+			<th>Author Name</th>
+		</table>
+	</div>
+</body>
+</html>
